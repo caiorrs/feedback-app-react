@@ -20,7 +20,7 @@ FeedbackStats.propTypes = {
       text: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
     })
-  ),
+  ).isRequired,
 };
 
 export default FeedbackStats;
