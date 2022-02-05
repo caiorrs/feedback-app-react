@@ -1,7 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 
-import { v4 as uuidv4 } from "uuid";
-
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
@@ -41,17 +39,31 @@ export const FeedbackProvider = ({ children }) => {
     setFeedbacks((prev) => [data, ...prev]);
   };
 
-  const deleteFeedback = (id) => {
+  const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure you want to delete?")) {
+      setIsLoading(true);
+      await fetch(`/feedbacks/${id}`, { method: "DELETE" });
       setFeedbacks((prev) => prev.filter((feedback) => feedback.id !== id));
+      setIsLoading(false);
     }
   };
 
   const editFeedback = (feedback) => setFeedbackEdit({ feedback, edit: true });
 
-  const updateFeedback = (id, updatedFeedback) => {
-    setFeedbacks(feedbacks.map((feedback) => (feedback.id === id ? { ...feedback, ...updatedFeedback } : feedback)));
+  const updateFeedback = async (id, updatedFeedback) => {
+    setIsLoading(true);
+    const response = await fetch(`/feedbacks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedFeedback),
+    });
+    const data = await response.json();
+
+    setFeedbacks(feedbacks.map((feedback) => (feedback.id === id ? { ...feedback, ...data } : feedback)));
     setFeedbackEdit({ feedback: {}, edit: false });
+    setIsLoading(false);
   };
 
   return (
