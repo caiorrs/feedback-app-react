@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 const Post = () => {
   // const params = useParams();
