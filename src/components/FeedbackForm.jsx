@@ -1,7 +1,6 @@
 import Button from "./shared/Button";
 import Card from "./shared/Card";
 import FeedbackContext from "../context/FeedbackContext";
-import PropTypes from "prop-types";
 import RatingSelect from "./RatingSelect";
 import { useContext } from "react";
 import { useState } from "react";
@@ -58,10 +57,6 @@ const FeedbackForm = () => {
       </form>
     </Card>
   );
-};
-
-FeedbackForm.propTypes = {
-  handleAdd: PropTypes.func.isRequired,
 };
 
 export default FeedbackForm;

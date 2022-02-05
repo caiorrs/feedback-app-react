@@ -25,8 +25,4 @@ const FeedbackList = () => {
   );
 };
 
-FeedbackList.propTypes = {
-  handleDelete: PropTypes.func.isRequired,
-};
-
 export default FeedbackList;
