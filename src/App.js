@@ -42,7 +42,8 @@ function App() {
             }
           />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/post/:id" element={<Post />} />
+          {/* <Route path="/post/:id" element={<Post />} /> */}
+          <Route path="/post/*" element={<Post />} />
         </Routes>
         <Card>
           <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
