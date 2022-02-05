@@ -20,22 +20,31 @@ export const FeedbackProvider = ({ children }) => {
 
   const fetchFeedbacks = async () => {
     setIsLoading(true);
-    const response = await fetch("http://localhost:5000/feedbacks?_sort=id&order=desc");
+    const response = await fetch("/feedbacks?_sort=id&order=desc");
     const data = await response.json();
 
     setFeedbacks(data);
     setIsLoading(false);
   };
 
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch("/feedbacks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFeedback),
+    });
+
+    const data = await response.json();
+
+    setFeedbacks((prev) => [data, ...prev]);
+  };
+
   const deleteFeedback = (id) => {
     if (window.confirm("Are you sure you want to delete?")) {
       setFeedbacks((prev) => prev.filter((feedback) => feedback.id !== id));
     }
-  };
-
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = uuidv4();
-    setFeedbacks((prev) => [newFeedback, ...prev]);
   };
 
   const editFeedback = (feedback) => setFeedbackEdit({ feedback, edit: true });
