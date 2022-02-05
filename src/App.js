@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import AboutIconLink from "./components/AboutIconLink";
 import AboutPage from "./pages/AboutPage";
 import FeedbackData from "./data/FeedbackData";
 import FeedbackForm from "./components/FeedbackForm";
@@ -40,6 +41,7 @@ function App() {
           />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
+        <AboutIconLink />
       </div>
     </Router>
   );
